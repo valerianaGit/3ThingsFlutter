@@ -4,7 +4,7 @@ import 'screens/home_daily_stoic_screen.dart';
 import 'utilities/strings.dart';
 import 'screens/gratitude_screen.dart';
 import 'screens/fear_screen.dart';
-import 'screens/calendar.dart';
+import 'screens/calendar_screen.dart';
 
 void main() {
   runApp(MyApp());
