@@ -1,3 +1,13 @@
+/**
+ * This screen is meant to provide a time box of one minute 
+ * for the user to do a grounding meditation, this includes 
+ * while breathing intentionally, noticing eveyrything one can see, 
+ * then graduating to evertything one can hear and then what one feels
+ * 
+ * Possible future features 
+ * sound for end of meditation
+ */
+
 import 'dart:async';
 import 'package:flutter/material.dart';
 
@@ -78,6 +88,14 @@ class _GroundingScreenState extends State<GroundingScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              Padding(
+                padding: EdgeInsets.only(
+                    top: 16.0, left: 64.0, right: 64.0, bottom: 32.0),
+                child: Text(
+                  'Describe your surroundings, everything you see during the meditation.',
+                  textAlign: TextAlign.center,
+                ),
+              ),
               SizedBox(
                 height: 200.0,
                 width: 200.0,
