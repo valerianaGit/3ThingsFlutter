@@ -4,6 +4,7 @@ import 'screens/home_daily_stoic_screen.dart';
 import 'utilities/strings.dart';
 import 'screens/gratitude_screen.dart';
 import 'screens/fear_screen.dart';
+import 'screens/calendar.dart';
 
 void main() {
   runApp(MyApp());
@@ -24,7 +25,8 @@ class MyApp extends StatelessWidget {
         Strings.homePage: (context) => HomeDailyStoic(),
         Strings.gratitudePage: (context) => GratitudeScreen(),
         Strings.fearPage: (context) => FearScreen(),
-        Strings.groundingPage: (context) => GroundingScreen()
+        Strings.groundingPage: (context) => GroundingScreen(),
+        Strings.calendarPage: (context) => CalendarScreen()
       },
     );
   }
