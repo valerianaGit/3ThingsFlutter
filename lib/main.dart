@@ -37,4 +37,7 @@ class MyApp extends StatelessWidget {
  * Navigation -> named routes
  * 
  * state management -> Provider 
+ * 
+ * Packages and libraries 
+ * https://pub.dev/packages/table_calendar
  */
