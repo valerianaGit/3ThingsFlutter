@@ -1,12 +1,12 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 
-class OtpTimer extends StatefulWidget {
+class GroundingScreen extends StatefulWidget {
   @override
-  _OtpTimerState createState() => _OtpTimerState();
+  _GroundingScreenState createState() => _GroundingScreenState();
 }
 
-class _OtpTimerState extends State<OtpTimer> {
+class _GroundingScreenState extends State<GroundingScreen> {
   final interval = const Duration(seconds: 1);
 
   final int timerMaxSeconds = 60;
@@ -119,10 +119,9 @@ class _OtpTimerState extends State<OtpTimer> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          //TODO: - CHANGE TO THE ROUTE TO MAIN HOMEPAGE
-          startTimeout();
+          Navigator.pop(context);
         },
-        tooltip: 'Done Editing',
+        tooltip: 'Done',
         child: const Icon(Icons.check),
       ),
     );

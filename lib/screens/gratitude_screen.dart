@@ -5,8 +5,15 @@ class GratitudeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Text('Gratitude'),
+    return Scaffold(
+      body: Text('Gratitude'),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.pop(context);
+        },
+        tooltip: 'Done',
+        child: const Icon(Icons.check),
+      ),
     );
   }
 }

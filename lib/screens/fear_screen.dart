@@ -5,8 +5,15 @@ class FearScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Text('Fear'),
+    return Scaffold(
+      body: Text('Fear'),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.pop(context);
+        },
+        tooltip: 'Done',
+        child: const Icon(Icons.check),
+      ),
     );
   }
 }
