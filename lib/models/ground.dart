@@ -1,4 +1,5 @@
 class Ground {
-  DateTime date = DateTime.now();
+  DateTime date;
+  //bool
   Ground({required this.date});
 }
