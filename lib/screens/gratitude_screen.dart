@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class GratitudeScreen extends StatelessWidget {
-  String newContent1;
-  String newContent2;
-  String newContent3;
+  String newContent1 = '';
+  String newContent2 = '';
+  String newContent3 = '';
 
   Widget getTextField(String newContent, String textPrompt) {
     return Container(

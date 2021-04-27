@@ -31,7 +31,7 @@ class _GroundingScreenState extends State<GroundingScreen> {
   }
 
   String get meditationButtonText {
-    String text;
+    String text = '';
     setState(() {
       if (startPause == false) {
         text = 'Restart Meditation';
@@ -43,7 +43,7 @@ class _GroundingScreenState extends State<GroundingScreen> {
   }
 
   Icon get getIcon {
-    Icon icon;
+    Icon icon = Icon(Icons.play_arrow);
     setState(() {
       if (startPause == false) {
         icon = Icon(Icons.replay_rounded);
@@ -54,7 +54,7 @@ class _GroundingScreenState extends State<GroundingScreen> {
     return icon;
   }
 
-  startTimeout([int milliseconds]) {
+  startTimeout([int milliseconds = 100]) {
     var duration = interval;
     startPause = !startPause;
     print('pause $startPause');

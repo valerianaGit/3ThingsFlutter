@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:three_things_flutter/utilities/strings.dart';
 
 class HomeDailyStoic extends StatelessWidget {
-  const HomeDailyStoic({Key key}) : super(key: key);
-
   Widget mainCards(String title, BuildContext context, String routePage) {
     return Expanded(
       child: InkWell(
