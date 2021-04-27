@@ -1,6 +1,6 @@
 import 'gratitude.dart';
 import 'fear.dart';
-import 'grounding.dart';
+import 'ground.dart';
 
 class Calendar {
   List<Gratitude> gratitudeArray = [];
