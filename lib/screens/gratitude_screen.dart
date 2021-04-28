@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:three_things_flutter/models/gratitude.dart';
+import 'package:three_things_flutter/models/viewModels/calendar_day_view_model.dart';
+import 'package:provider/provider.dart';
 
 class GratitudeScreen extends StatelessWidget {
-  String newContent1 = '';
-  String newContent2 = '';
-  String newContent3 = '';
+  final String newContent1 = '';
+  final String newContent2 = '';
+  final String newContent3 = '';
 
   Widget getTextField(String newContent, String textPrompt) {
     return Container(
@@ -53,6 +56,16 @@ class GratitudeScreen extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
+          //if (newContent1 != '' && newContent2 != '' && newContent3 != '') {
+          Provider.of<CalendarDayViewModel>(context, listen: false)
+              .addAnotherGratitude(
+            Gratitude(
+                date: DateTime.now(),
+                entry1: newContent1,
+                entry2: newContent2,
+                entry3: newContent3),
+          );
+          //}
           Navigator.pop(context);
         },
         tooltip: 'Done',

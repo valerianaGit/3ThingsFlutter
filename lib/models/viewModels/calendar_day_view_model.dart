@@ -6,6 +6,7 @@ import 'package:three_things_flutter/models/gratitude.dart';
 import 'package:three_things_flutter/models/fear.dart';
 import 'package:three_things_flutter/models/ground.dart';
 import 'dart:collection';
+import 'package:provider/provider.dart';
 //import 'package:three_things_flutter/models/gratitude.dart';
 
 //how do you handle the model of a calendar?
@@ -45,11 +46,12 @@ class CalendarDayViewModel extends ChangeNotifier {
         entry3: gratitude.entry3);
     _gratitudesList.add(newGratitude);
     print(_gratitudesList);
+    //TODO: - RESOLVE that it is returning an instance of gratitude instead of the values, this happened before in the pregnancy journaling app
+    ////https://stackoverflow.com/a/60265841/7842175
     notifyListeners();
   }
 
   //FEAR
-  //
   final List<Fear> _fearsList = [
     Fear(
         date: DateTime.now(),
@@ -77,6 +79,14 @@ class CalendarDayViewModel extends ChangeNotifier {
   }
 
   //GROUND
-  //WE JUST NEED TO HAVE A BOLLEAN , THAT STARTS AT FALSE AND TURNS TO YES IF THERE WAS A COMPLETED MEDITATION THAT DAY
 
+  bool meditationCompletedToday = false;
+  void updateMeditationCompletedToday() {
+    meditationCompletedToday = true;
+    notifyListeners();
+  }
+
+  bool get meditationDoneToday {
+    return meditationCompletedToday;
+  }
 }

@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:three_things_flutter/models/fear.dart';
+import 'package:three_things_flutter/models/viewModels/calendar_day_view_model.dart';
 
 class FearScreen extends StatelessWidget {
-  String newContent1 = '';
-  String newContent2 = '';
-  String newContent3 = '';
+  final String newContent1 = '';
+  final String newContent2 = '';
+  final String newContent3 = '';
 
   Widget getTextField(String newContent, String textPrompt) {
     return Container(
@@ -55,6 +58,14 @@ class FearScreen extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
+          Provider.of<CalendarDayViewModel>(context, listen: false)
+              .addAnotherFear(
+            Fear(
+                date: DateTime.now(),
+                define: newContent1,
+                actions: newContent2,
+                stillAlright: newContent3),
+          );
           Navigator.pop(context);
         },
         tooltip: 'Done',

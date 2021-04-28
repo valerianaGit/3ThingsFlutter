@@ -10,6 +10,8 @@
 
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:three_things_flutter/models/viewModels/calendar_day_view_model.dart';
 
 class GroundingScreen extends StatefulWidget {
   @override
@@ -71,6 +73,20 @@ class _GroundingScreenState extends State<GroundingScreen> {
       });
     });
   }
+
+  // void updateMeditationDone() {
+  //   setState(() {
+  //     if (timerMaxSeconds == currentSeconds) {
+  //       Provider.of<CalendarDayViewModel>(context, listen: false)
+  //           .meditationCompletedToday;
+  //     }
+  //     // or
+  //     if (timerText == '00: 00') {
+  //       Provider.of<CalendarDayViewModel>(context, listen: false)
+  //           .meditationCompletedToday;
+  //     }
+  //   });
+  // }
 
   @override
   void initState() {
@@ -137,6 +153,9 @@ class _GroundingScreenState extends State<GroundingScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
+          //TODO: FIX updating the calendar day that a meditation has been completed today
+          Provider.of<CalendarDayViewModel>(context, listen: false)
+              .meditationCompletedToday;
           Navigator.pop(context);
         },
         tooltip: 'Done',
