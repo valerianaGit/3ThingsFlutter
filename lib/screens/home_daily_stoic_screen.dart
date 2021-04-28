@@ -34,7 +34,7 @@ class HomeDailyStoic extends StatelessWidget {
           mainCards('Gratitude', context, Strings.gratitudePage),
           mainCards('Fear', context, Strings.fearPage),
           mainCards('Grounding', context, Strings.groundingPage),
-          mainCards('Calendar', context, Strings.calendarPage)
+          mainCards('Calendar', context, Strings.calendarDayPage)
         ],
       )),
     );

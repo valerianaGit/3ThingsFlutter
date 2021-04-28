@@ -5,4 +5,5 @@ class Strings {
   static const String fearPage = "/fear";
   static const String groundingPage = "/grounding";
   static const String calendarPage = "/calendar";
+  static const String calendarDayPage = "/calendarDay";
 }
