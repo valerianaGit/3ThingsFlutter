@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:three_things_flutter/utilities/strings.dart';
+import 'package:three_things_flutter/widgets/main_cards.dart';
 
 class CalendarDayPage extends StatelessWidget {
   @override
@@ -8,37 +9,27 @@ class CalendarDayPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Calendar Day'),
       ),
-      body: Container(
+      body: SafeArea(
+        child: Container(
           child: Column(
-        children: [
-          //Day circle with colors representing the 3 models
-          Container(),
-          ////Card fopr gratitudes
-          mainCards('Gratitude', context, Strings.gratitudePage),
+            children: [
+              //Day circle with colors representing the 3 models
+              Container(),
 
-          ///card for fear
-          mainCards('Fear', context, Strings.fearPage)
-        ],
-      )),
-    );
-  }
-}
+              mainCards('Gratitude', context, Strings.gratitudePage),
 
-Widget mainCards(String title, BuildContext context, String routePage) {
-  return Expanded(
-    child: InkWell(
-      onTap: () {
-        Navigator.pushNamed(context, routePage);
-      },
-      child: SizedBox(
-        height: 60.0,
-        child: Padding(
-          padding: EdgeInsets.all(8.0),
-          child: Card(
-            child: Center(child: Text(title)),
+              mainCards('Fear', context, Strings.fearPage)
+            ],
           ),
         ),
       ),
-    ),
-  );
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.pop(context);
+        },
+        tooltip: 'Done',
+        child: const Icon(Icons.check),
+      ),
+    );
+  }
 }

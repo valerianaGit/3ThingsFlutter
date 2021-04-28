@@ -19,7 +19,7 @@ class FearViewModel extends ChangeNotifier {
     return _fearsList.length;
   }
 
-  void addAnotherGratitude(Fear fear) {
+  void addAnotherFear(Fear fear) {
     Fear newFear = Fear(
         date: fear.date,
         define: fear.define,
