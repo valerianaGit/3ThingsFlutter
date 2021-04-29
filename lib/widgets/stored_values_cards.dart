@@ -15,7 +15,7 @@ class StoredValuesCards extends StatelessWidget {
           elevation: 5.0,
           child: Padding(
             padding: const EdgeInsets.all(16.0),
-            child: Text('$content1, $content2, $content3'),
+            child: Text('$content1,\n $content2,\n $content3'),
           ),
         ),
       ),
