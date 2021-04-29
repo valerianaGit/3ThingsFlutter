@@ -9,6 +9,7 @@ import 'screens/calendar_screen.dart';
 import 'screens/calendar_day_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:three_things_flutter/models/viewModels/calendar_day_view_model.dart';
+import 'screens/gratitude_or_fear_past_entries_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -25,7 +26,6 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        //home: HomeDailyStoic() //OtpTimer(), //HomePage(),
         initialRoute: '/',
         routes: {
           Strings.homePage: (context) => HomeDailyStoic(),
@@ -33,7 +33,16 @@ class MyApp extends StatelessWidget {
           Strings.fearPage: (context) => FearScreen(),
           Strings.groundingPage: (context) => GroundingScreen(),
           Strings.calendarPage: (context) => CalendarScreen(),
-          Strings.calendarDayPage: (context) => CalendarDayPage()
+          Strings.calendarDayPage: (context) => CalendarDayPage(),
+          Strings.gratitudePastEntriesPage: (context) =>
+              GratitudeOrFearPastEntriesScreen(
+                  generatingCard: Strings.routeToGratitudePastEntries),
+          Strings.fearPastEntriesPage: (context) =>
+              GratitudeOrFearPastEntriesScreen(
+                  generatingCard: Strings.routeToFearPastEntries),
+          //TODO: Possible refcator to include these screens as swappable widgets with the already
+          //existing gratitude and fear screens , instead of creating the gratitude and past entries page,
+          //could be handled the same way I handled the swap already.
         },
       ),
     );
