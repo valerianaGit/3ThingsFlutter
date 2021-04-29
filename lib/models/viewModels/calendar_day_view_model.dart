@@ -28,6 +28,21 @@ class CalendarDayViewModel extends ChangeNotifier {
   ////we only need to update the list here
   final List<Gratitude> _gratitudesList = [
     Gratitude(
+        date: DateTime.now(),
+        entry1: 'family',
+        entry2: 'baloo',
+        entry3: 'home'),
+    Gratitude(
+        date: DateTime.now(),
+        entry1: 'family',
+        entry2: 'baloo',
+        entry3: 'home'),
+    Gratitude(
+        date: DateTime.now(),
+        entry1: 'family',
+        entry2: 'baloo',
+        entry3: 'home'),
+    Gratitude(
         date: DateTime.now(), entry1: 'family', entry2: 'baloo', entry3: 'home')
   ];
   UnmodifiableListView<Gratitude> get gratitudesList {
@@ -53,6 +68,26 @@ class CalendarDayViewModel extends ChangeNotifier {
 
   //FEAR
   final List<Fear> _fearsList = [
+    Fear(
+        date: DateTime.now(),
+        define: 'dying',
+        actions: 'not really much',
+        stillAlright: 'Does it matter in the grand scheme of things?'),
+    Fear(
+        date: DateTime.now(),
+        define: 'dying',
+        actions: 'not really much',
+        stillAlright: 'Does it matter in the grand scheme of things?'),
+    Fear(
+        date: DateTime.now(),
+        define: 'dying',
+        actions: 'not really much',
+        stillAlright: 'Does it matter in the grand scheme of things?'),
+    Fear(
+        date: DateTime.now(),
+        define: 'dying',
+        actions: 'not really much',
+        stillAlright: 'Does it matter in the grand scheme of things?'),
     Fear(
         date: DateTime.now(),
         define: 'dying',
