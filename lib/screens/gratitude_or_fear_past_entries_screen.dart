@@ -4,9 +4,10 @@ import 'package:three_things_flutter/widgets/fear_list.dart';
 import 'package:three_things_flutter/utilities/strings.dart';
 
 class GratitudeOrFearPastEntriesScreen extends StatelessWidget {
-  final String generatingCard = '';
-  GratitudeOrFearPastEntriesScreen({generatingCard});
+  final String generatingCard;
+  GratitudeOrFearPastEntriesScreen({required this.generatingCard});
   Widget getWidget() {
+    print('generating card: $generatingCard');
     if (generatingCard == Strings.routeToGratitudePastEntries) {
       return SafeArea(
         child: GratitudeList(),
