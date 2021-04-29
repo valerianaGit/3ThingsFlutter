@@ -22,6 +22,10 @@ class GratitudeOrFearPastEntriesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text(
+            'Past entries'), //TODO: - REPLACE this with the data of the date we are looking into
+      ),
       body: Container(
         child: getWidget(),
       ),
