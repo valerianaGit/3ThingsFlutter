@@ -61,8 +61,10 @@ class CalendarDayViewModel extends ChangeNotifier {
         entry3: gratitude.entry3);
     _gratitudesList.add(newGratitude);
     print(_gratitudesList);
-    //TODO: - RESOLVE that it is returning an instance of gratitude instead of the values, this happened before in the pregnancy journaling app
-    ////https://stackoverflow.com/a/60265841/7842175
+    //This print statement  is returning an instance of gratitude instead of the values, this happened before in the pregnancy journaling app
+    //NOW I KNOW, it wasn't being asked to return the properties of the objects, just the list of objects,
+    //if we asked to print an instance, then we could get the actual values
+    print(' gratitude entry 1 ${_gratitudesList[0].entry1}'); // like so
     notifyListeners();
   }
 
