@@ -13,6 +13,7 @@ class CalendarDayPage extends StatelessWidget {
         child: Container(
           child: Column(
             children: [
+              //TODO: - Create this circle with the colors
               //Day circle with colors representing the 3 models
               Container(),
 
