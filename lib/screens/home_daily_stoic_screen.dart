@@ -13,10 +13,25 @@ class HomeDailyStoic extends StatelessWidget {
           child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          mainCards('Gratitude', context, Strings.gratitudePage),
-          mainCards('Fear', context, Strings.fearPage),
-          mainCards('Grounding', context, Strings.groundingPage),
-          mainCards('Calendar', context, Strings.calendarDayPage)
+          MainCard(
+              title: 'Gratitude',
+              context: context,
+              routePage: Strings.gratitudePage),
+          // mainCards('Gratitude', context, Strings.gratitudePage),
+          MainCard(
+              title: 'Fear', context: context, routePage: Strings.fearPage),
+          // mainCards('Fear', context, Strings.fearPage),
+          MainCard(
+              title: 'Grounding',
+              context: context,
+              routePage: Strings.groundingPage),
+
+          //mainCards('Grounding', context, Strings.groundingPage),
+          MainCard(
+              title: 'Calendar',
+              context: context,
+              routePage: Strings.calendarDayPage)
+          //mainCards('Calendar', context, Strings.calendarDayPage)
         ],
       )),
     );
