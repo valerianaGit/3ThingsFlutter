@@ -24,9 +24,6 @@ class CalendarDayPage extends StatelessWidget {
                   title: 'Fear',
                   context: context,
                   routePage: Strings.fearPastEntriesPage),
-              // mainCards('Gratitude', context, Strings.gratitudePastEntriesPage),
-
-              // mainCards('Fear', context, Strings.fearPastEntriesPage)
             ],
           ),
         ),
