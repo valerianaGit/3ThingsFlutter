@@ -17,21 +17,16 @@ class HomeDailyStoic extends StatelessWidget {
               title: 'Gratitude',
               context: context,
               routePage: Strings.gratitudePage),
-          // mainCards('Gratitude', context, Strings.gratitudePage),
           MainCard(
               title: 'Fear', context: context, routePage: Strings.fearPage),
-          // mainCards('Fear', context, Strings.fearPage),
           MainCard(
               title: 'Grounding',
               context: context,
               routePage: Strings.groundingPage),
-
-          //mainCards('Grounding', context, Strings.groundingPage),
           MainCard(
               title: 'Calendar',
               context: context,
               routePage: Strings.calendarDayPage)
-          //mainCards('Calendar', context, Strings.calendarDayPage)
         ],
       )),
     );
