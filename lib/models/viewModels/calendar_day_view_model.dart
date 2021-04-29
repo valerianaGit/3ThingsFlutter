@@ -34,13 +34,13 @@ class CalendarDayViewModel extends ChangeNotifier {
         entry3: 'home'),
     Gratitude(
         date: DateTime.now(),
-        entry1: 'family',
-        entry2: 'baloo',
-        entry3: 'home'),
+        entry1: 'baby',
+        entry2: 'house',
+        entry3: 'running water'),
     Gratitude(
         date: DateTime.now(),
-        entry1: 'family',
-        entry2: 'baloo',
+        entry1: 'I dont have a toothcache',
+        entry2: '',
         entry3: 'home'),
   ];
   UnmodifiableListView<Gratitude> get gratitudesList {
