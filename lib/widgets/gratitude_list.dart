@@ -14,7 +14,7 @@ class GratitudeList extends StatelessWidget {
               final entry = entryData.gratitudesList[index];
 
               return StoredValuesCards(
-                  content1: entry.entry1,
+                  content1: 'On this day, I was thankful for\n ${entry.entry1}',
                   content2: entry.entry2,
                   content3: entry.entry3);
             },
