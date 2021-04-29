@@ -29,23 +29,3 @@ class MainCard extends StatelessWidget {
     );
   }
 }
-
-// Widget mainCards(String title, BuildContext context, String routePage) {
-//   return Expanded(
-//     child: InkWell(
-//       onTap: () {
-//         Navigator.pushNamed(context, routePage);
-//       },
-//       child: SizedBox(
-//         height: 60.0,
-//         child: Padding(
-//           padding: EdgeInsets.all(8.0),
-//           child: Card(
-//             elevation: 5.0,
-//             child: Center(child: Text(title)),
-//           ),
-//         ),
-//       ),
-//     ),
-//   );
-// }
