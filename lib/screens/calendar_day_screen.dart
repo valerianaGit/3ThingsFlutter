@@ -16,9 +16,9 @@ class CalendarDayPage extends StatelessWidget {
               //Day circle with colors representing the 3 models
               Container(),
 
-              mainCards('Gratitude', context, Strings.gratitudePage),
+              mainCards('Gratitude', context, Strings.gratitudePastEntriesPage),
 
-              mainCards('Fear', context, Strings.fearPage)
+              mainCards('Fear', context, Strings.fearPastEntriesPage)
             ],
           ),
         ),
