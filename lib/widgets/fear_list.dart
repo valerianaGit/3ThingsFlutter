@@ -13,9 +13,10 @@ class FearList extends StatelessWidget {
             itemBuilder: (context, index) {
               final entry = entryData.fearsList[index];
               return StoredValuesCards(
-                  content1: entry.define,
-                  content2: entry.actions,
-                  content3: entry.stillAlright);
+                  content1: 'Define fear\n ${entry.define}',
+                  content2: 'What can I do about it\n ${entry.actions}',
+                  content3:
+                      'How will things still be alright\n ${entry.stillAlright}');
             },
             itemCount: entryData.fearsCount,
           );
