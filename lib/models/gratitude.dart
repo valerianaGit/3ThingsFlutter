@@ -6,7 +6,7 @@ class Gratitude {
 
   Gratitude(
       {required this.date,
-      this.entry1 = '',
-      this.entry2 = '',
-      this.entry3 = ''});
+      required this.entry1,
+      required this.entry2,
+      required this.entry3});
 }
