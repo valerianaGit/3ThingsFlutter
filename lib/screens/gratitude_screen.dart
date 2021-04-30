@@ -4,35 +4,67 @@ import 'package:three_things_flutter/models/viewModels/calendar_day_view_model.d
 import 'package:provider/provider.dart';
 
 class GratitudeScreen extends StatelessWidget {
-  final String newContent1 = '';
-  final String newContent2 = '';
-  final String newContent3 = '';
+  // GratitudeScreen(
+  //     {required this.newContent1,
+  //     required this.newContent2,
+  //     required this.newContent3});
+  //GratitudeScreen({});
 
-  Widget getTextField(String newContent, String textPrompt) {
-    return Container(
-      child: Expanded(
-        child: Padding(
-          padding: EdgeInsets.all(8.0),
-          child: TextField(
-            maxLines: 5, //wrap text
-            autofocus: true,
-            autocorrect: true,
-            cursorColor: Colors.purple[900],
-            decoration: InputDecoration(
-              border: OutlineInputBorder(),
-              labelText: textPrompt,
-            ),
-            onChanged: (newValue) {
-              newContent = newValue;
-            },
-          ),
-        ),
-      ),
-    );
-  }
+  // Widget getTextField(String newContent, String textPrompt) {
+  //   return Container(
+  //     child: Expanded(
+  //       child: Padding(
+  //         padding: EdgeInsets.all(8.0),
+  //         child: TextField(
+  //           maxLines: 5, //wrap text
+  //           autofocus: true,
+  //           autocorrect: true,
+  //           cursorColor: Colors.purple[900],
+  //           decoration: InputDecoration(
+  //             border: OutlineInputBorder(),
+  //             labelText: textPrompt,
+  //           ),
+  //           onChanged: (newValue) {
+  //             newContent = newValue;
+  //             print('newContent : $newContent');
+  //             // print('newContent1: $newContent1');
+  //           },
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
+    String newContent1 = '';
+    String newContent2 = '';
+    String newContent3 = '';
+    // Widget getTextField(String newContent, String textPrompt) {
+    //   return Container(
+    //     child: Expanded(
+    //       child: Padding(
+    //         padding: EdgeInsets.all(8.0),
+    //         child: TextField(
+    //           maxLines: 5, //wrap text
+    //           autofocus: true,
+    //           autocorrect: true,
+    //           cursorColor: Colors.purple[900],
+    //           decoration: InputDecoration(
+    //             border: OutlineInputBorder(),
+    //             labelText: textPrompt,
+    //           ),
+    //           onChanged: (newValue) {
+    //             newContent = newValue;
+    //             // print('newContent : $newContent');
+    //             // print('newContent1: $newContent1');
+    //           },
+    //         ),
+    //       ),
+    //     ),
+    //   );
+    // }
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Gratitude'),
@@ -47,16 +79,79 @@ class GratitudeScreen extends StatelessWidget {
                     bottom: 32.0,
                   ),
                   child: Text('3 things I am grateful for today')),
-              getTextField(newContent1, 'Gratitude 1'),
-              getTextField(newContent2, 'Gratitude 2'),
-              getTextField(newContent3, 'Gratitude 3'),
+              //TODO: - Abstract this code for the textfield cards into a mutable object?
+              //this might work to be able to mutate the values in content1,2,3
+              //reuse in the FEAR SCREEN as well since they are basically the same
+              Container(
+                child: Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: TextField(
+                      maxLines: 5, //wrap text
+                      autofocus: true,
+                      autocorrect: true,
+                      cursorColor: Colors.purple[900],
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'Gratitude 1',
+                      ),
+                      onChanged: (newValue) {
+                        newContent1 = newValue;
+                      },
+                    ),
+                  ),
+                ),
+              ),
+              //end of textfield card
+              Container(
+                child: Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: TextField(
+                      maxLines: 5, //wrap text
+                      autofocus: true,
+                      autocorrect: true,
+                      cursorColor: Colors.purple[900],
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'Gratitude 2',
+                      ),
+                      onChanged: (newValue) {
+                        newContent2 = newValue;
+                      },
+                    ),
+                  ),
+                ),
+              ),
+              Container(
+                child: Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: TextField(
+                      maxLines: 5, //wrap text
+                      autofocus: true,
+                      autocorrect: true,
+                      cursorColor: Colors.purple[900],
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'Gratitude 3',
+                      ),
+                      onChanged: (newValue) {
+                        newContent3 = newValue;
+                      },
+                    ),
+                  ),
+                ),
+              ),
+              // getTextField(newContent1, 'Gratitude 1'),
+              // getTextField(newContent2, 'Gratitude 2'),
+              // getTextField(newContent3, 'Gratitude 3'),
             ],
           ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          //if (newContent1 != '' && newContent2 != '' && newContent3 != '') {
           Provider.of<CalendarDayViewModel>(context, listen: false)
               .addAnotherGratitude(
             Gratitude(
@@ -65,7 +160,7 @@ class GratitudeScreen extends StatelessWidget {
                 entry2: newContent2,
                 entry3: newContent3),
           );
-          //}
+
           Navigator.pop(context);
         },
         tooltip: 'Done',
