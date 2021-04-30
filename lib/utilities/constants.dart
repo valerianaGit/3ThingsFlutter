@@ -5,7 +5,7 @@ final kInnerDecoration = BoxDecoration(
   border: Border.all(color: Colors.white),
   borderRadius: BorderRadius.circular(32),
 );
-
+// border for all 3 colors
 final kGradientBoxDecoration = BoxDecoration(
   gradient: LinearGradient(
       colors: [Colors.yellow.shade600, Colors.orange, Colors.red]),

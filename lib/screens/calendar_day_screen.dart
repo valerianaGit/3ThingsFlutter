@@ -20,16 +20,31 @@ class CalendarDayPage extends StatelessWidget {
               //TODO: - Create this circle with the colors in the border
               //Day circle with colors representing the 3 models
               //https://stackoverflow.com/a/59964891/7842175
-              Container(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    child: Text("12", style: TextStyle(fontSize: 200.0)),
-                    decoration: kInnerDecoration,
+              ClipOval(
+                clipBehavior: Clip.antiAlias,
+                child: Container(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0), //width of the border
+                    child: ClipOval(
+                      clipBehavior: Clip.antiAlias,
+                      child: Container(
+                        width:
+                            240.0, // this width forces the container to be a circle
+                        height:
+                            240.0, // this height forces the container to be a circle
+                        child: Text(
+                          "12",
+                          style: TextStyle(
+                            fontSize: 200.0,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                        decoration: kInnerDecoration,
+                      ),
+                    ),
                   ),
+                  decoration: kGradientBoxDecoration,
                 ),
-                //height: 66.0,
-                decoration: kGradientBoxDecoration,
               ),
               // ClipOval(
               //   clipBehavior: Clip.antiAlias,
