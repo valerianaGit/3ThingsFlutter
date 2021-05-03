@@ -43,6 +43,7 @@ class MyApp extends StatelessWidget {
           //TODO: Possible refcator to include these screens as swappable widgets with the already
           //existing gratitude and fear screens , instead of creating the gratitude and past entries page,
           //could be handled the same way I handled the swap already.
+          //TODO: - SWAP THE CURRENT Generating card values to be enums instead of strings, seems it might be much safer. -  TASK ID clickup #u95hq5
         },
       ),
     );
