@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:three_things_flutter/models/calendar_day.dart';
 import 'screens/grounding_screen.dart';
 import 'screens/home_daily_stoic_screen.dart';
 import 'utilities/strings.dart';
@@ -51,7 +50,7 @@ class MyApp extends StatelessWidget {
 }
 
 /**
- * 
+ * Flutter linter setup, to run => flutter analyze on terminal
  * Navigation -> named routes
  * 
  * state management -> Provider 

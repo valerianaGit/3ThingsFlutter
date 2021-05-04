@@ -4,11 +4,11 @@ import 'package:three_things_flutter/widgets/fear_list.dart';
 import 'package:three_things_flutter/utilities/strings.dart';
 
 class GratitudeOrFearPastEntriesScreen extends StatelessWidget {
-  /**first, I had generatingard = '' for non null safety, and di not have the required parameter in the constructor -> it was not working
-   * generatingCard never got updated and it always remaind = ''.
-   * Once I made the constructor parameter required, marked it with 'this' and took out the '' initializer, it works now. generatingCard updates to correct 
-   * value passed from calendar_day_screen -> to main -> back to here. 
-   */
+  /// first, I had generatingard = '' for non null safety, and di not have the required parameter in the constructor -> it was not working
+  /// generatingCard never got updated and it always remaind = ''.
+  /// Once I made the constructor parameter required, marked it with 'this' and took out the '' initializer, it works now. generatingCard updates to correct
+  /// value passed from calendar_day_screen -> to main -> back to here.
+
   final String generatingCard;
   GratitudeOrFearPastEntriesScreen({required this.generatingCard});
   Widget getWidget() {

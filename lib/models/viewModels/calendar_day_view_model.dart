@@ -1,12 +1,8 @@
 import 'package:flutter/cupertino.dart';
-import 'gratitude_view_model.dart';
-import 'fear_view_model.dart';
-import 'ground_view_model.dart';
 import 'package:three_things_flutter/models/gratitude.dart';
 import 'package:three_things_flutter/models/fear.dart';
-import 'package:three_things_flutter/models/ground.dart';
 import 'dart:collection';
-import 'package:provider/provider.dart';
+
 //import 'package:three_things_flutter/models/gratitude.dart';
 
 //how do you handle the model of a calendar?
