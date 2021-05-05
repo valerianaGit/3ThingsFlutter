@@ -1,12 +1,10 @@
-/**
- * This screen is meant to provide a time box of one minute 
- * for the user to do a grounding meditation, this includes 
- * while breathing intentionally, noticing eveyrything one can see, 
- * then graduating to evertything one can hear and then what one feels
- * 
- * Possible future features 
- * sound for end of meditation
- */
+/// This screen is meant to provide a time box of one minute
+/// for the user to do a grounding meditation, this includes
+///  while breathing intentionally, noticing eveyrything one can see,
+/// then graduating to evertything one can hear and then what one feels
+
+/// Possible future features
+/// sound for end of meditation
 
 import 'dart:async';
 import 'package:flutter/material.dart';
@@ -154,6 +152,7 @@ class _GroundingScreenState extends State<GroundingScreen> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           //TODO: FIX updating the calendar day that a meditation has been completed today
+
           Provider.of<CalendarDayViewModel>(context, listen: false)
               .meditationCompletedToday;
           Navigator.pop(context);

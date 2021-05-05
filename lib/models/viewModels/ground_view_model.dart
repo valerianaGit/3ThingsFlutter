@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:three_things_flutter/models/ground.dart';
+//import 'package:three_things_flutter/models/ground.dart';
 
 class GroundViewModel extends ChangeNotifier {
   // final List<Gratitude> _gratitudesList = [
