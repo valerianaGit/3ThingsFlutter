@@ -5,8 +5,8 @@ import 'package:three_things_flutter/models/gratitude.dart';
 
 class GratitudeViewModel extends ChangeNotifier {
   final List<Gratitude> _gratitudesList = [
-    Gratitude(
-        date: DateTime.now(), entry1: 'family', entry2: 'baloo', entry3: 'home')
+    // Gratitude(
+    //     date: DateTime.now(), entry1: 'family', entry2: 'baloo', entry3: 'home')
   ];
   UnmodifiableListView<Gratitude> get gratitudesList {
     return UnmodifiableListView(_gratitudesList);
