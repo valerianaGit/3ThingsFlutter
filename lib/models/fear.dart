@@ -6,7 +6,7 @@ class Fear {
 
   Fear(
       {required this.date,
-      this.define = '',
-      this.actions = '',
-      this.stillAlright = ''});
+      required this.define,
+      required this.actions,
+      required this.stillAlright});
 }

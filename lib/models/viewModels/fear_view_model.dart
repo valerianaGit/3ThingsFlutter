@@ -5,11 +5,11 @@ import 'package:three_things_flutter/models/fear.dart';
 
 class FearViewModel extends ChangeNotifier {
   final List<Fear> _fearsList = [
-    Fear(
-        date: DateTime.now(),
-        define: 'dying',
-        actions: 'not really much',
-        stillAlright: 'Does it matter in the grand scheme of things?')
+    // Fear(
+    //     date: DateTime.now(),
+    //     define: 'dying',
+    //     actions: 'not really much',
+    //     stillAlright: 'Does it matter in the grand scheme of things?')
   ];
   UnmodifiableListView<Fear> get fearsList {
     return UnmodifiableListView(_fearsList);
