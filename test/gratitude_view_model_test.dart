@@ -9,7 +9,7 @@ void main() {
         date: DateTime.now(), entry1: "air", entry2: "water", entry3: "soil");
 
     gratitudeViewModel.addAnotherGratitude(gratitude);
-
+// test could fail if I have some hard coded values in the gratitudes list in the view model, check there
     expect(gratitudeViewModel.gratitudesCount, 1);
   });
 }
