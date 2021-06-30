@@ -18,7 +18,7 @@ class GratitudeViewModel extends ChangeNotifier {
 
   void addAnotherGratitude(Gratitude gratitude) {
     Gratitude newGratitude = Gratitude(
-        date: gratitude.date,
+        //date: gratitude.date,
         entry1: gratitude.entry1,
         entry2: gratitude.entry2,
         entry3: gratitude.entry3);
