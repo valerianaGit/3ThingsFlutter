@@ -121,7 +121,7 @@ class FearScreen extends StatelessWidget {
           Provider.of<CalendarDayViewModel>(context, listen: false)
               .addAnotherFear(
             Fear(
-                date: DateTime.now(),
+                //dateID: ,//FIGURE OUT HOW TO ACCESS TODAY'S DAYID DateTime.now(),
                 define: newContent1,
                 actions: newContent2,
                 stillAlright: newContent3),
