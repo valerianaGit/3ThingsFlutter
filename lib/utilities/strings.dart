@@ -13,4 +13,10 @@ class Strings {
   static const String routeToGratitudePastEntries =
       "/routeToGratitudePastEntries";
   static const String routeToFearPastEntries = "/routeToFearPastEntries";
+
+  // MARK: - Database names
+  static const String calendarDayDataBase = "calendarDay";
+  static const String fearDataBase = "fear";
+  static const String gratitudeDataBase = "gratitude";
+  static const String groundDataBase = "ground";
 }
