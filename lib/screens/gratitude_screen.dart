@@ -155,7 +155,7 @@ class GratitudeScreen extends StatelessWidget {
           Provider.of<CalendarDayViewModel>(context, listen: false)
               .addAnotherGratitude(
             Gratitude(
-                date: DateTime.now(),
+                //dateID: ,// HOW TO ACCESS THE DATEID ?DateTime.now(),
                 entry1: newContent1,
                 entry2: newContent2,
                 entry3: newContent3),
