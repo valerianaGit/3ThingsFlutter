@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:three_things_flutter/models/calendar_day.dart';
 import 'package:three_things_flutter/models/gratitude.dart';
 import 'package:three_things_flutter/models/fear.dart';
 import 'dart:collection';
@@ -23,21 +24,9 @@ class CalendarDayViewModel extends ChangeNotifier {
   //Gratitude
   ////we only need to update the list here
   final List<Gratitude> _gratitudesList = [
-    Gratitude(
-        date: DateTime.now(),
-        entry1: 'family',
-        entry2: 'baloo',
-        entry3: 'home'),
-    Gratitude(
-        date: DateTime.now(),
-        entry1: 'baby',
-        entry2: 'house',
-        entry3: 'running water'),
-    Gratitude(
-        date: DateTime.now(),
-        entry1: 'I dont have a toothcache',
-        entry2: '',
-        entry3: 'home'),
+    Gratitude(entry1: 'family', entry2: 'baloo', entry3: 'home'),
+    Gratitude(entry1: 'baby', entry2: 'house', entry3: 'running water'),
+    Gratitude(entry1: 'I dont have a toothcache', entry2: '', entry3: 'home'),
   ];
   UnmodifiableListView<Gratitude> get gratitudesList {
     return UnmodifiableListView(_gratitudesList);
@@ -49,7 +38,6 @@ class CalendarDayViewModel extends ChangeNotifier {
 
   void addAnotherGratitude(Gratitude gratitude) {
     Gratitude newGratitude = Gratitude(
-        date: gratitude.date,
         entry1: gratitude.entry1,
         entry2: gratitude.entry2,
         entry3: gratitude.entry3);
@@ -65,27 +53,22 @@ class CalendarDayViewModel extends ChangeNotifier {
   //FEAR
   final List<Fear> _fearsList = [
     Fear(
-        date: DateTime.now(),
         define: 'dying',
         actions: 'not really much',
         stillAlright: 'Does it matter in the grand scheme of things?'),
     Fear(
-        date: DateTime.now(),
         define: 'dying',
         actions: 'not really much',
         stillAlright: 'Does it matter in the grand scheme of things?'),
     Fear(
-        date: DateTime.now(),
         define: 'dying',
         actions: 'not really much',
         stillAlright: 'Does it matter in the grand scheme of things?'),
     Fear(
-        date: DateTime.now(),
         define: 'dying',
         actions: 'not really much',
         stillAlright: 'Does it matter in the grand scheme of things?'),
     Fear(
-        date: DateTime.now(),
         define: 'dying',
         actions: 'not really much',
         stillAlright: 'Does it matter in the grand scheme of things?')
@@ -100,7 +83,7 @@ class CalendarDayViewModel extends ChangeNotifier {
 
   void addAnotherFear(Fear fear) {
     Fear newFear = Fear(
-        date: fear.date,
+        //date: fear.date,
         define: fear.define,
         actions: fear.actions,
         stillAlright: fear.stillAlright);
