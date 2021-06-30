@@ -21,7 +21,7 @@ class FearViewModel extends ChangeNotifier {
 
   void addAnotherFear(Fear fear) {
     Fear newFear = Fear(
-        date: fear.date,
+        //date: fear.date,
         define: fear.define,
         actions: fear.actions,
         stillAlright: fear.stillAlright);
