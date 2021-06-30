@@ -6,7 +6,7 @@ void main() {
   test('Number of fears should be incremented to 1', () {
     final fearViewModel = FearViewModel();
     final fear = Fear(
-        date: DateTime.now(),
+        //date: DateTime.now(),
         define: 'Afraid of monsters',
         actions: 'get monster spray',
         stillAlright: 'If I get eaten, I will go live in wonderland');
