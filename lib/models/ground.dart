@@ -2,25 +2,26 @@ import 'calendar_day.dart';
 
 class Ground {
   int? id;
-  DateTime date; //CalendarDay date; // store date only, not time
+  int? dateID; //CalendarDay date; // store date only, not time
 
-  Ground({this.id, required this.date});
+  Ground({this.id, this.dateID});
 
-  static final columns = ["id", "date"];
+  static final columns = ["id", "dateID"];
 
   Map<String, dynamic> toMap() {
     final map = Map<String, dynamic>();
     map['id'] = id;
-    map['date'] = date;
+    map['dateID'] = dateID;
     return map;
   }
 
-  static fromMap(Map<String, dynamic> map) {
-    return Ground(id: map["id"], date: map["date"]);
+  static fromMap(Map map) {
+    return Ground(
+        id: map["id"], dateID: map["dateID"]); //DateTime.parse(map["dateID"]));
   }
 
   @override
   String toString() {
-    return 'Ground{id: $id, date: $date}';
+    return 'Ground{id: $id, date: $dateID}';
   }
 }
