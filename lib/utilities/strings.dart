@@ -19,4 +19,13 @@ class Strings {
   static const String fearDataBase = "fear";
   static const String gratitudeDataBase = "gratitude";
   static const String groundDataBase = "ground";
+
+  //MARK: - Database columns
+  // common column names
+  static const String idColumn = "id";
+  static const String dateColumn = "date";
+  // Calendar day table
+  static const String gratitudeArrayColum = "gratitude_array";
+  static const String fearArrayColumn = "fear_array";
+  static const String groundColumn = "ground_bool";
 }

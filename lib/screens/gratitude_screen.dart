@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:three_things_flutter/models/gratitude.dart';
 import 'package:three_things_flutter/models/viewModels/calendar_day_view_model.dart';
+import 'package:three_things_flutter/models/calendar_day.dart';
 import 'package:provider/provider.dart';
 
 class GratitudeScreen extends StatelessWidget {
@@ -154,8 +155,10 @@ class GratitudeScreen extends StatelessWidget {
         onPressed: () {
           Provider.of<CalendarDayViewModel>(context, listen: false)
               .addAnotherGratitude(
+            CalendarDay(date: DateTime.now()),
             Gratitude(
-                //dateID: ,// HOW TO ACCESS THE DATEID ?DateTime.now(),
+                // here update to use crud methods
+                //   dateID: ,// HOW TO ACCESS THE DATEID ?DateTime.now(),
                 entry1: newContent1,
                 entry2: newContent2,
                 entry3: newContent3),

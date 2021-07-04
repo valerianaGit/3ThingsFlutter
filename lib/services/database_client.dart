@@ -12,13 +12,15 @@ import 'dart:convert';
 
 class DatabaseClient {
   Future<Database> initializedDatabase() async {
+    WidgetsFlutterBinding.ensureInitialized();
     String path = await getDatabasesPath();
     return openDatabase(
       join(path, 'three_things_database.db'),
       onCreate: (database, version) async {
         // calendar day table
         await database.execute(
-          "CREATE TABLE ${Strings.calendarDayDataBase} (id INTEGER PRIMARY KEY, date TEXT NOT NULL,gratitudes TEXT, fears TEXT, ground TEXT)",
+          //TODO - RECOMMENDATION TO USE DATE :  INTEGER INSTEAD OF STRING
+          "CREATE TABLE ${Strings.calendarDayDataBase} (${Strings.idColumn} INTEGER PRIMARY KEY, ${Strings.dateColumn} TEXT, ${Strings.gratitudeArrayColum} TEXT, ${Strings.fearArrayColumn} TEXT, ${Strings.groundColumn} TEXT)",
         );
         // fear table
         await database.execute(
@@ -321,7 +323,7 @@ class DatabaseClient {
     final Database database = await initializedDatabase();
     var count = Sqflite.firstIntValue(await database.rawQuery(
         "SELECT COUNT(*) FROM ${Strings.calendarDayDataBase} WHERE date = ?",
-        [day.date]));
+        [day.date.toIso8601String()]));
     if (count == 0) {
       // create because today's date was not existent already in the database
       var newDay = await insertAndReturnCalendarDay(day);

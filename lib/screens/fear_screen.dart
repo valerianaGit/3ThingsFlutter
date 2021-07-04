@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:three_things_flutter/models/calendar_day.dart';
 import 'package:three_things_flutter/models/fear.dart';
 import 'package:three_things_flutter/models/viewModels/calendar_day_view_model.dart';
+import 'package:three_things_flutter/services/database_client.dart';
 
 class FearScreen extends StatelessWidget {
   // Widget getTextField(String newContent, String textPrompt) {
@@ -120,8 +122,10 @@ class FearScreen extends StatelessWidget {
         onPressed: () {
           Provider.of<CalendarDayViewModel>(context, listen: false)
               .addAnotherFear(
+            CalendarDay(date: DateTime.now()),
             Fear(
-                //dateID: ,//FIGURE OUT HOW TO ACCESS TODAY'S DAYID DateTime.now(),
+                // here update to use crud methods
+                //   dateID: ,//FIGURE OUT HOW TO ACCESS TODAY'S DAYID DateTime.now(),
                 define: newContent1,
                 actions: newContent2,
                 stillAlright: newContent3),

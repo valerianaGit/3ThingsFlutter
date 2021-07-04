@@ -5,7 +5,7 @@ import 'fear.dart';
 
 class CalendarDay {
   int? id;
-  DateTime? date;
+  DateTime date;
   List<Gratitude>? gratitudeArray;
   // for these lists, I'll need to serialize into JSON string to be stored in SQLite
   List<Fear>? fearArray;
@@ -13,23 +13,23 @@ class CalendarDay {
 
   CalendarDay(
       {this.id,
-      this.date,
+      required this.date,
       this.gratitudeArray,
       this.fearArray,
       this.groundBool});
 
   static final columns = [
-    "id",
-    "date",
-    "gratitude_array",
-    "fear_array",
-    "ground_bool"
+    'id',
+    'date',
+    'gratitude_array',
+    'fear_array',
+    'ground_bool'
   ];
 
   Map<String, dynamic> toMap() {
     final map = Map<String, dynamic>();
     map['id'] = id;
-    map['date'] = date;
+    map['date'] = date.toIso8601String(); //toString(); //jsonEncode(date);
     //MARK: List serialization into JSON String to be stored in SQLte database
     // https://bezkoder.com/dart-flutter-convert-object-to-json-string/
     map['gratitude_array'] =
@@ -43,7 +43,7 @@ class CalendarDay {
   static fromMap(Map map) {
     return CalendarDay(
         id: map['id'],
-        date: DateTime.parse(map['date']),
+        date: DateTime.parse(map['date']), // jsonDecode(map['date']),
         gratitudeArray: jsonDecode(
             map['gratitude_array']), //Deserialize JSON strings into arrays
         fearArray: jsonDecode(
