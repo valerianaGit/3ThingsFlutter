@@ -29,9 +29,8 @@ class CalendarDay {
   Map<String, dynamic> toMap() {
     final map = Map<String, dynamic>();
     map['id'] = id;
-    map['date'] = date.toIso8601String(); //toString(); //jsonEncode(date);
-    //MARK: List serialization into JSON String to be stored in SQLte database
-    // https://bezkoder.com/dart-flutter-convert-object-to-json-string/
+    map['date'] =
+        date.millisecondsSinceEpoch; // to integer millisecond since 1970
     map['gratitude_array'] =
         jsonEncode(gratitudeArray); //SERIALIZE THE ARRAYS INTO JSON strings
     map['fear_array'] =
@@ -43,7 +42,8 @@ class CalendarDay {
   static fromMap(Map map) {
     return CalendarDay(
         id: map['id'],
-        date: DateTime.parse(map['date']), // jsonDecode(map['date']),
+        date: DateTime.fromMillisecondsSinceEpoch(
+            map['date']), // jsonDecode(map['date']),
         gratitudeArray: jsonDecode(
             map['gratitude_array']), //Deserialize JSON strings into arrays
         fearArray: jsonDecode(

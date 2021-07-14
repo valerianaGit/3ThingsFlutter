@@ -14,26 +14,27 @@ class DatabaseClient {
   Future<Database> initializedDatabase() async {
     WidgetsFlutterBinding.ensureInitialized();
     String path = await getDatabasesPath();
+    print('Database path: $path');
     return openDatabase(
       join(path, 'three_things_database.db'),
       onCreate: (database, version) async {
         // calendar day table
         await database.execute(
           //TODO - RECOMMENDATION TO USE DATE :  INTEGER INSTEAD OF STRING
-          "CREATE TABLE ${Strings.calendarDayDataBase} (${Strings.idColumn} INTEGER PRIMARY KEY, ${Strings.dateColumn} TEXT, ${Strings.gratitudeArrayColum} TEXT, ${Strings.fearArrayColumn} TEXT, ${Strings.groundColumn} TEXT)",
+          "CREATE TABLE ${Strings.calendarDayDataBase} (${Strings.idColumn} INTEGER PRIMARY KEY, ${Strings.dateColumn} Integer NOT NULL, ${Strings.gratitudeArrayColum} TEXT, ${Strings.fearArrayColumn} TEXT, ${Strings.groundColumn} TEXT)",
         );
-        // fear table
-        await database.execute(
-          "CREATE TABLE ${Strings.fearDataBase} (id INTEGER PRIMARY KEY, dateID INTEGER, define TEXT, actions TEXT, stillAlright TEXT)",
-        );
-        // gratitude table
-        await database.execute(
-          "CREATE TABLE ${Strings.gratitudeDataBase} (id INTEGER PRIMARY KEY, dateID INTEGER, entry1 TEXT, entry2 TEXT, entry3 TEXT)",
-        );
-        // ground table
-        await database.execute(
-          "CREATE TABLE ${Strings.groundDataBase} (id INTEGER PRIMARY KEY, dateID INTEGER)",
-        );
+        // // fear table
+        // await database.execute(
+        //   "CREATE TABLE ${Strings.fearDataBase} (id INTEGER PRIMARY KEY, dateID INTEGER NOT NULL, define TEXT, actions TEXT, stillAlright TEXT)",
+        // );
+        // // gratitude table
+        // await database.execute(
+        //   "CREATE TABLE ${Strings.gratitudeDataBase} (id INTEGER PRIMARY KEY, dateID INTEGER NOT NULL, entry1 TEXT, entry2 TEXT, entry3 TEXT)",
+        // );
+        // // ground table
+        // await database.execute(
+        //   "CREATE TABLE ${Strings.groundDataBase} (id INTEGER PRIMARY KEY, dateID INTEGER NOT NULL)",
+        // );
       },
       version: 1,
     );
@@ -41,7 +42,170 @@ class DatabaseClient {
 
 // MARK: - CRUD OPERATIONS
 
-// MARK: - Fear
+//MARK: -  CalendarDay
+
+// Create / insert calendarDay
+  Future<void> insertCalendarDay(CalendarDay day) async {
+    final Database database = await initializedDatabase();
+    await database.insert(
+      Strings.calendarDayDataBase,
+      day.toMap(),
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
+  }
+
+  // Create / insert calendar day that returns that new calendarDay
+  Future<CalendarDay> insertAndReturnCalendarDay(CalendarDay day) async {
+    final Database database = await initializedDatabase();
+    day.id = await database.insert(
+      Strings.calendarDayDataBase,
+      day.toMap(),
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
+    return day;
+  }
+
+  // Retrieve / get calendarDay
+  Future<List<CalendarDay>> getAllCalendarDays() async {
+    final Database database = await initializedDatabase();
+    final List<Map<String, dynamic>> maps =
+        await database.query(Strings.calendarDayDataBase);
+    return List.generate(maps.length, (i) {
+      return CalendarDay(
+          id: maps[i]['id'],
+          date: DateTime.fromMillisecondsSinceEpoch(maps[i]['date']),
+          gratitudeArray: jsonDecode(maps[i]
+              ['gratitude_array']), //Deserialize JSON strings into arrays
+          fearArray: jsonDecode(
+              maps[i]['fear_array']), //Deserialize JSON strings into arrays
+          groundBool: maps[i]['ground_bool']);
+    });
+  }
+
+// fetch single day
+  Future<CalendarDay> fetchCalendarDay(int id) async {
+    final Database database = await initializedDatabase();
+    List<Map> results = await database.query(Strings.calendarDayDataBase,
+        columns: CalendarDay.columns, where: "id = ?", whereArgs: [id]);
+    CalendarDay day = CalendarDay.fromMap(results[0]);
+    return day;
+  }
+
+  // Update day
+  Future<void> updateday(CalendarDay day) async {
+    final Database database = await initializedDatabase();
+    await database.update(
+      Strings.calendarDayDataBase,
+      day.toMap(),
+      where: 'id = ?',
+      whereArgs: [day.id],
+    );
+  }
+
+  // update calendar day's fear array and create or update a fear in the fear data table
+  // when using this method, I will probably just pass the date for the calendarDay ,
+  // based on the date , I will look if the date exists already in the database
+  // use this method when we want to create a new fear
+  //TODO: fix this method to be a single concern
+  Future<void> upsertCalendarDayFearListAndFearTable(
+      CalendarDay day, Fear fear) async {
+    final Database database = await initializedDatabase();
+// here we are querying the database for how many entries exist with this date,
+// and setting that as the count,
+    var count = Sqflite.firstIntValue(await database.rawQuery(
+        //TODO: Correct this query so it looks up the date to see if a date already exists in the database
+        "SELECT COUNT(*) FROM ${Strings.calendarDayDataBase} WHERE date = ?",
+        [day.date.millisecondsSinceEpoch]));
+    // if count == 0, there is no record of this in the database
+// go ahead and create the date
+    if (count == 0) {
+// create because today's date was not existent already in the database
+      var newDay = await insertAndReturnCalendarDay(day);
+      upsertCalendarDayFearListAndFearTable(newDay, fear);
+    } else {
+      await database.update(
+        // UPDATE ONLY THE day's fear list
+        Strings.calendarDayDataBase,
+        day.toMap(),
+        where: 'id = ?',
+        //TODO: - should this use a different key than the id, we nee to update the correct id,
+        // if a new calendar day had to be created
+        whereArgs: [day.fearArray], // update the fear array
+      );
+    }
+    // create fear in fear table
+    //insertFear(fear);
+  }
+
+  // Update calendar day's gratirude array and create (or update) gratitude in the gratitude data table
+  //TODO: fix this method to be a single concern
+  Future<void> upsertDayGratitudeListAndGratitudeTable(
+      CalendarDay day, Gratitude gratitude) async {
+    var updatedDay = day; // start the updatedDay assuming it already exists
+    final Database database = await initializedDatabase();
+    var count = Sqflite.firstIntValue(await database.rawQuery(
+        //TODO: Correct this query so it looks up the date to see if a date already exists in the database
+        "SELECT COUNT(*) FROM ${Strings.calendarDayDataBase} WHERE date = ?",
+        [day.date.millisecondsSinceEpoch]));
+    if (count == 0) {
+      // create because today's date was not existent already in the database
+      var newDay = await insertAndReturnCalendarDay(day);
+      updatedDay =
+          newDay; // if an entry doesn't exist, update the day to the newDay
+      upsertDayGratitudeListAndGratitudeTable(newDay,
+          gratitude); // until we fix the count query above, this is a recursive method with no base case
+    } else {
+      await database.update(
+        //UPDATE ONLY THE day's gratitude list
+        Strings.calendarDayDataBase,
+        day.toMap(),
+        where: 'id = ?',
+        whereArgs: [day.gratitudeArray],
+      );
+    }
+    // create gratitude in gratitude table
+    // insertGratitude(gratitude, updatedDay.id!);
+  }
+
+  // Update calendar day's ground
+  Future<void> upsertDayGroundingMeditation(
+      CalendarDay day, Ground ground) async {
+    final Database database = await initializedDatabase();
+    var count = Sqflite.firstIntValue(await database.rawQuery(
+        "SELECT COUNT(*) FROM ${Strings.calendarDayDataBase} WHERE date = ?",
+        [day.date]));
+    if (count == 0) {
+      // create because today's date was not existent already in the database
+      var newDay = await insertAndReturnCalendarDay(day);
+      upsertDayGroundingMeditation(newDay, ground);
+    } else {
+      await database.update(
+        // UPDATE ONLY THE day's ground property to true
+        Strings.calendarDayDataBase,
+        day.toMap(),
+        where: 'id = ?',
+        whereArgs: [day.groundBool], // change from default false, to true
+      );
+    }
+  }
+
+  // Delete day
+  // we might not need to do this, since we want all days to exist,
+  // though eliminating all data in a day, yet not the day itself, might be useful
+  // for that we would need to call update, not delete
+  //TODO: CHECK OUT STEEMIT TUTORIAL FOR AN EXAMPLE OF HANDLING A NESTED DATA MODEL
+  Future<void> deleteDay(int id) async {
+    final Database database = await initializedDatabase();
+    await database.delete(
+      Strings.calendarDayDataBase,
+      where: "id = ?",
+      whereArgs: [id],
+    );
+  }
+}
+
+/** CRUD OPERATIONS FOR FEAR / GRATITUDE AND GROUND TABLES
+  // MARK: - Fear
 // every change we make here, we have to also update the CalendarDay table
 // Create / insert fear
   Future<void> insertFear(Fear fear) async {
@@ -115,7 +279,7 @@ class DatabaseClient {
 // every change we make here, we have to also update the CalendarDay table
 
 // Create / insert gratitude
-  Future<void> insertGratitude(Gratitude gratitude) async {
+  Future<void> insertGratitude(Gratitude gratitude, int dayID) async {
     final Database database = await initializedDatabase();
     await database.insert(
       Strings.gratitudeDataBase,
@@ -222,158 +386,6 @@ class DatabaseClient {
       where: "id = ?",
       whereArgs: [id],
     );
-  }
-
-//MARK: -  CalendarDay
-
-// Create / insert calendarDay
-  Future<void> insertCalendarDay(CalendarDay day) async {
-    final Database database = await initializedDatabase();
-    await database.insert(
-      Strings.calendarDayDataBase,
-      day.toMap(),
-      conflictAlgorithm: ConflictAlgorithm.replace,
-    );
-  }
-
-  // Create / insert calendar day that returns that new calendarDay
-  Future<CalendarDay> insertAndReturnCalendarDay(CalendarDay day) async {
-    final Database database = await initializedDatabase();
-    day.id = await database.insert(
-      Strings.calendarDayDataBase,
-      day.toMap(),
-      conflictAlgorithm: ConflictAlgorithm.replace,
-    );
-    return day;
-  }
-
-  // Retrieve / get calendarDay
-  Future<List<CalendarDay>> getAllCalendarDays() async {
-    final Database database = await initializedDatabase();
-    final List<Map<String, dynamic>> maps =
-        await database.query(Strings.calendarDayDataBase);
-    return List.generate(maps.length, (i) {
-      return CalendarDay(
-          id: maps[i]['id'],
-          date: DateTime.parse(maps[i]['date']),
-          gratitudeArray: jsonDecode(maps[i]
-              ['gratitude_array']), //Deserialize JSON strings into arrays
-          fearArray: jsonDecode(
-              maps[i]['fear_array']), //Deserialize JSON strings into arrays
-          groundBool: maps[i]['ground_bool']);
-    });
-  }
-
-// fetch single day
-  Future<CalendarDay> fetchCalendarDay(int id) async {
-    final Database database = await initializedDatabase();
-    List<Map> results = await database.query(Strings.calendarDayDataBase,
-        columns: CalendarDay.columns, where: "id = ?", whereArgs: [id]);
-    CalendarDay day = CalendarDay.fromMap(results[0]);
-    return day;
-  }
-
-  // Update day
-  Future<void> updateday(CalendarDay day) async {
-    final Database database = await initializedDatabase();
-    await database.update(
-      Strings.calendarDayDataBase,
-      day.toMap(),
-      where: 'id = ?',
-      whereArgs: [day.id],
-    );
-  }
-
-  // update calendar day's fear array and create or update a fear in the fear data table
-  // when using this method, I will probably just pass the date for the calendarDay ,
-  // based on the date , I will look if the date exists already in the database
-  // use this method when we want to create a new fear
-  Future<void> upsertCalendarDayFearListAndFearTable(
-      CalendarDay day, Fear fear) async {
-    final Database database = await initializedDatabase();
-// here we are querying the database for how many entries exist with this date,
-// and setting that as the count,
-    var count = Sqflite.firstIntValue(await database.rawQuery(
-        "SELECT COUNT(*) FROM ${Strings.calendarDayDataBase} WHERE date = ?",
-        [day.date]));
-    // if count == 0, there is no record of this in the database
-// go ahead and create the date
-    if (count == 0) {
-// create because today's date was not existent already in the database
-      var newDay = await insertAndReturnCalendarDay(day);
-      upsertCalendarDayFearListAndFearTable(newDay, fear);
-    } else {
-      await database.update(
-        // UPDATE ONLY THE day's fear list
-        Strings.calendarDayDataBase,
-        day.toMap(),
-        where: 'id = ?',
-        //TODO: - should this use a different key than the id, we nee to update the correct id,
-        // if a new calendar day had to be created
-        whereArgs: [day.fearArray], // update the fear array
-      );
-    }
-    // create fear in fear table
-    insertFear(fear);
-  }
-
-  // Update calendar day's gratirude array and create (or update) gratitude in the gratitude data table
-  Future<void> upsertDayGratitudeListAndGratitudeTable(
-      CalendarDay day, Gratitude gratitude) async {
-    final Database database = await initializedDatabase();
-    var count = Sqflite.firstIntValue(await database.rawQuery(
-        "SELECT COUNT(*) FROM ${Strings.calendarDayDataBase} WHERE date = ?",
-        [day.date.toIso8601String()]));
-    if (count == 0) {
-      // create because today's date was not existent already in the database
-      var newDay = await insertAndReturnCalendarDay(day);
-      upsertDayGratitudeListAndGratitudeTable(newDay, gratitude);
-    } else {
-      await database.update(
-        //UPDATE ONLY THE day's gratitude list
-        Strings.calendarDayDataBase,
-        day.toMap(),
-        where: 'id = ?',
-        whereArgs: [day.gratitudeArray],
-      );
-    }
-    // create gratitude in gratitude table
-    insertGratitude(gratitude);
-  }
-
-  // Update calendar day's ground
-  Future<void> upsertDayGroundingMeditation(
-      CalendarDay day, Ground ground) async {
-    final Database database = await initializedDatabase();
-    var count = Sqflite.firstIntValue(await database.rawQuery(
-        "SELECT COUNT(*) FROM ${Strings.calendarDayDataBase} WHERE date = ?",
-        [day.date]));
-    if (count == 0) {
-      // create because today's date was not existent already in the database
-      var newDay = await insertAndReturnCalendarDay(day);
-      upsertDayGroundingMeditation(newDay, ground);
-    } else {
-      await database.update(
-        // UPDATE ONLY THE day's ground propety to true
-        Strings.calendarDayDataBase,
-        day.toMap(),
-        where: 'id = ?',
-        whereArgs: [day.groundBool], // change from default false, to true
-      );
-    }
-  }
-
-  // Delete day
-  // we might not need to do this, since we want all days to exist,
-  // though eliminating all data in a day, yet not the day itself, might be useful
-  // for that we would need to call update, not delete
-  //TODO: CHECK OUT STEEMIT TUTORIAL FOR AN EXAMPLE OF HANDLING A NESTED DATA MODEL
-  Future<void> deleteDay(int id) async {
-    final Database database = await initializedDatabase();
-    await database.delete(
-      Strings.calendarDayDataBase,
-      where: "id = ?",
-      whereArgs: [id],
-    );
-  }
-}
+  } 
+  
+  */

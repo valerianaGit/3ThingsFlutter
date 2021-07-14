@@ -33,10 +33,15 @@ dependencies:
   test: ^1.16.5
   sqflite: ^2.0.0+3
   path: ^1.8.0
+  json_annotation: ^4.0.1
+  moor_flutter: ^4.0.0
+  intl: ^0.17.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  moor_generator: ^4.4.1
+  build_runner: ^2.0.6
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
