@@ -2,7 +2,9 @@ import 'package:flutter/foundation.dart';
 import 'dart:convert';
 import 'gratitude.dart';
 import 'fear.dart';
+import 'package:json_annotation/json_annotation.dart' as j;
 
+@j.JsonSerializable()
 class CalendarDay {
   int? id;
   DateTime date;
@@ -25,6 +27,9 @@ class CalendarDay {
     'fear_array',
     'ground_bool'
   ];
+
+  // factory CalendarDay.fromJson(Map<String, dynamic> json) =>
+  //     _$CalendarDayFromJson(json);
 
   Map<String, dynamic> toMap() {
     final map = Map<String, dynamic>();
