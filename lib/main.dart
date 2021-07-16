@@ -54,6 +54,7 @@ class MyApp extends StatelessWidget {
  * Navigation -> named routes
  * 
  * state management -> Provider 
+ * data persistence -> SQFlite / MOOR 
  * 
  * Packages and libraries 
  * https://pub.dev/packages/table_calendar
