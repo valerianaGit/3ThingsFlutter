@@ -17,9 +17,9 @@ class Fear {
   Fear(
       {this.id,
       this.dateID,
-      required this.define,
-      required this.actions,
-      required this.stillAlright});
+      this.define = '',
+      this.actions = '',
+      this.stillAlright = ''});
 
   static final columns = ["id", "define", "actions", "stillAlright", "dateID"];
 

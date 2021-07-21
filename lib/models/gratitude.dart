@@ -18,9 +18,9 @@ class Gratitude {
   Gratitude(
       {this.id,
       this.dateID,
-      required this.entry1,
-      required this.entry2,
-      required this.entry3});
+      this.entry1 = '',
+      this.entry2 = '',
+      this.entry3 = ''});
 
   static final columns = ["id", "dateID", "entry1", "entry2", "entry3"];
 
