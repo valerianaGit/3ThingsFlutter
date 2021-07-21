@@ -3,8 +3,9 @@ import 'calendar_day.dart';
 class Ground {
   int? id;
   int? dateID; //CalendarDay date; // store date only, not time
+  bool meditate;
 
-  Ground({this.id, this.dateID});
+  Ground({this.id, this.dateID, this.meditate = false});
 
   static final columns = ["id", "dateID"];
 
