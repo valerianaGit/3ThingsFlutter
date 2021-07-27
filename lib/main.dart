@@ -9,6 +9,7 @@ import 'screens/calendar_day_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:three_things_flutter/models/viewModels/calendar_day_view_model.dart';
 import 'screens/gratitude_or_fear_past_entries_screen.dart';
+import 'services/moor_db.dart';
 
 void main() {
   runApp(MyApp());
