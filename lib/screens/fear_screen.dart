@@ -4,6 +4,7 @@ import 'package:three_things_flutter/models/calendar_day.dart';
 import 'package:three_things_flutter/models/fear.dart';
 import 'package:three_things_flutter/models/viewModels/calendar_day_view_model.dart';
 import 'package:three_things_flutter/services/database_client.dart';
+import 'package:three_things_flutter/services/moor_db.dart';
 
 class FearScreen extends StatelessWidget {
   // Widget getTextField(String newContent, String textPrompt) {
@@ -34,6 +35,7 @@ class FearScreen extends StatelessWidget {
     String newContent1 = '';
     String newContent2 = '';
     String newContent3 = '';
+    CalendarDayDB calendarDayDB = Provider.of(context);
     return Scaffold(
       appBar: AppBar(
         title: Text('Fear'),
@@ -120,16 +122,23 @@ class FearScreen extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Provider.of<CalendarDayViewModel>(context, listen: false)
-              .addAnotherFear(
-            CalendarDay(date: DateTime.now()),
-            Fear(
-                // here update to use crud methods
-                //   dateID: ,//FIGURE OUT HOW TO ACCESS TODAY'S DAYID DateTime.now(),
-                define: newContent1,
-                actions: newContent2,
-                stillAlright: newContent3),
-          );
+          // Provider.of<CalendarDayViewModel>(context, listen: false)
+          //     .addAnotherFear(
+          //   CalendarDay(date: DateTime.now()),
+          //   Fear(
+          //       // here update to use crud methods
+          //       //   dateID: ,//FIGURE OUT HOW TO ACCESS TODAY'S DAYID DateTime.now(),
+          //       define: newContent1,
+          //       actions: newContent2,
+          //       stillAlright: newContent3),
+          // );
+          Fear fear = Fear(
+              // here update to use crud methods
+              //   dateID: ,//FIGURE OUT HOW TO ACCESS TODAY'S DAYID DateTime.now(),
+              define: newContent1,
+              actions: newContent2,
+              stillAlright: newContent3);
+          calendarDayDB.updateDayWithNewFear(fear);
           Navigator.pop(context);
         },
         tooltip: 'Done',
