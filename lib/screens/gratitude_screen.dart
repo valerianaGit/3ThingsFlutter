@@ -3,6 +3,7 @@ import 'package:three_things_flutter/models/gratitude.dart';
 import 'package:three_things_flutter/models/viewModels/calendar_day_view_model.dart';
 import 'package:three_things_flutter/models/calendar_day.dart';
 import 'package:provider/provider.dart';
+import 'package:three_things_flutter/services/moor_db.dart';
 
 class GratitudeScreen extends StatelessWidget {
   // GratitudeScreen(
@@ -41,6 +42,7 @@ class GratitudeScreen extends StatelessWidget {
     String newContent1 = '';
     String newContent2 = '';
     String newContent3 = '';
+    CalendarDayDB calendarDayDB = Provider.of(context);
     // Widget getTextField(String newContent, String textPrompt) {
     //   return Container(
     //     child: Expanded(
@@ -153,17 +155,23 @@ class GratitudeScreen extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Provider.of<CalendarDayViewModel>(context, listen: false)
-              .addAnotherGratitude(
-            CalendarDay(date: DateTime.now()),
-            Gratitude(
-                // here update to use crud methods
-                //   dateID: ,// HOW TO ACCESS THE DATEID ?DateTime.now(),
-                entry1: newContent1,
-                entry2: newContent2,
-                entry3: newContent3),
-          );
-
+          // Provider.of<CalendarDayViewModel>(context, listen: false)
+          //     .addAnotherGratitude(
+          //   CalendarDay(date: DateTime.now()),
+          //   Gratitude(
+          //       // here update to use crud methods
+          //       //   dateID: ,// HOW TO ACCESS THE DATEID ?DateTime.now(),
+          //       entry1: newContent1,
+          //       entry2: newContent2,
+          //       entry3: newContent3),
+          // );
+          Gratitude gratitude = Gratitude(
+              // here update to use crud methods
+              //   dateID: ,// HOW TO ACCESS THE DATEID ?DateTime.now(),
+              entry1: newContent1,
+              entry2: newContent2,
+              entry3: newContent3);
+          calendarDayDB.updateDayWithNewGratitude(gratitude);
           Navigator.pop(context);
         },
         tooltip: 'Done',
